@@ -1,0 +1,66 @@
+﻿@model List<RaceDay.Mvc.Models.Event>
+
+@{
+    ViewData["Title"] = "Home";
+    var role = ViewBag.Role as string;
+}
+
+<section class="hero-section">
+    <div class="hero-content">
+        <h1>WELCOME TO RACEDAY</h1>
+        <h2>Every Race Has A Story.</h2>
+        <p>Discover events, challenge yourself and be part of something exciting.</p>
+        <a href="#events" class="btn btn-primary">Explore Events</a>
+    </div>
+
+    <div class="hero-card">
+        <h3>Ready, Set, Race!</h3>
+        <p>Your next adventure starts here.</p>
+    </div>
+</section>
+
+<section class="events-section" id="events">
+    <h2>Upcoming Events</h2>
+    <p>Explore the races waiting for you.</p>
+
+    <div class="event-container">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var raceEvent in Model)
+            {
+                <div class="event-card">
+                    <h3>@raceEvent.EventName</h3>
+
+                    <p>@raceEvent.Description</p>
+
+                    <p><strong>Date:</strong> @raceEvent.EventDate.ToString("dd MMMM yyyy")</p>
+
+                    <p><strong>Location:</strong> @raceEvent.Location</p>
+
+                    <p><strong>Distance:</strong> @raceEvent.Distance km</p>
+
+                    <a asp-controller="Home"
+                       asp-action="Details"
+                       asp-route-id="@raceEvent.EventID"
+                       class="btn btn-primary">
+                        View Details
+                    </a>
+
+                    @if (role == "Participant")
+                    {
+                        <a asp-controller="Enrolments"
+                           asp-action="Create"
+                           asp-route-eventID="@raceEvent.EventID"
+                           class="btn btn-success">
+                            Enrol Now
+                        </a>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <p>No events are currently available.</p>
+        }
+    </div>
+</section>

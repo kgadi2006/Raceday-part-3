@@ -1,0 +1,87 @@
+﻿@using RaceDay.Mvc.Models
+
+@{
+    ViewData["Title"] = "Enrol in Event";
+
+    var categories = ViewBag.Categories as List<Category>
+                     ?? new List<Category>();
+}
+
+<div class="container mt-5 mb-5">
+
+    <h2 class="fw-bold">Enrol in Event</h2>
+
+    <p class="text-muted">
+        Select a category to join this event.
+    </p>
+
+    <h5 class="mb-3">@ViewBag.EventName</h5>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (categories.Any())
+    {
+        <form asp-controller="Enrolments"
+              asp-action="Create"
+              method="post">
+
+            <input type="hidden"
+                   name="eventID"
+                   value="@ViewBag.EventID" />
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Select Category
+                </label>
+
+                <select name="categoryID"
+                        class="form-select"
+                        required>
+
+                    <option value="">Choose a category</option>
+
+                    @foreach (var category in categories)
+                    {
+                        <option value="@category.CategoryID">
+                            @category.CategoryName -
+                            @category.CategoryType:
+                            @category.CategoryValue
+                        </option>
+                    }
+
+                </select>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Enrol Now
+            </button>
+
+            <a asp-controller="Home"
+               asp-action="Index"
+               class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </form>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            No categories are available for this event yet.
+        </div>
+
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Back to Events
+        </a>
+    }
+
+</div>

@@ -1,0 +1,89 @@
+﻿@model List<RaceDay.Mvc.Models.EventEnrolment>
+
+@{
+    ViewData["Title"] = "My Enrolments";
+}
+
+<div class="container mt-5 mb-5">
+
+    <h2 class="fw-bold">My Enrolments</h2>
+
+    <p class="text-muted">
+        View the events you have enrolled in.
+    </p>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>Event ID</th>
+                        <th>Category ID</th>
+                        <th>Enrolment Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var enrolment in Model)
+                    {
+                        <tr>
+                            <td>@enrolment.EventID</td>
+
+                            <td>@enrolment.CategoryID</td>
+
+                            <td>
+                                @enrolment.EnrolmentDate.ToString("dd MMM yyyy")
+                            </td>
+
+                            <td>
+                                <form asp-controller="Enrolments"
+                                      asp-action="Delete"
+                                      asp-route-id="@enrolment.EnrolmentID"
+                                      method="post"
+                                      onsubmit="return confirm('Are you sure you want to cancel this enrolment?');">
+
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger">
+                                        Cancel Enrolment
+                                    </button>
+
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            You have not enrolled in any events yet.
+        </div>
+    }
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="btn btn-primary">
+        Explore Events
+    </a>
+
+</div>

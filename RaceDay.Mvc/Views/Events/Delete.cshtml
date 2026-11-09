@@ -1,0 +1,33 @@
+﻿@model RaceDay.Mvc.Models.Event
+
+@{
+    ViewData["Title"] = "Delete Event";
+}
+
+<div class="container mt-5">
+    <h2>Delete Event</h2>
+
+    <div class="alert alert-warning">
+        Are you sure you want to delete this event?
+        This action cannot be undone.
+    </div>
+
+    <h4>@Model.EventName</h4>
+
+    <p><strong>Date:</strong> @Model.EventDate.ToString("dd MMMM yyyy")</p>
+    <p><strong>Location:</strong> @Model.Location</p>
+    <p><strong>Distance:</strong> @Model.Distance km</p>
+
+    <form asp-controller="Events" asp-action="Delete"
+          asp-route-id="@Model.EventID" method="post">
+
+        <button type="submit" class="btn btn-danger">
+            Yes, Delete Event
+        </button>
+
+        <a asp-controller="Events" asp-action="Index"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+    </form>
+</div>

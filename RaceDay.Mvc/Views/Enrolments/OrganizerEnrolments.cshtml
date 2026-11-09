@@ -1,0 +1,127 @@
+﻿@model List<RaceDay.Mvc.Models.OrganizerEnrolment>
+
+@{
+    ViewData["Title"] = "View Enrolments";
+}
+
+<div class="container mt-5 mb-5">
+
+    <h2 class="fw-bold">Event Enrolments</h2>
+
+    <p class="text-muted">
+        View participants enrolled in your events and their race results.
+    </p>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>Participant</th>
+                        <th>Email</th>
+                        <th>Event</th>
+                        <th>Category</th>
+                        <th>Enrolment Date</th>
+                        <th>Finish Time</th>
+                        <th>Position</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var enrolment in Model)
+                    {
+                        <tr>
+                            <td>@enrolment.ParticipantName</td>
+
+                            <td>@enrolment.ParticipantEmail</td>
+
+                            <td>@enrolment.EventName</td>
+
+                            <td>
+                                @enrolment.CategoryName
+                                (@enrolment.CategoryType:
+                                @enrolment.CategoryValue)
+                            </td>
+
+                            <td>
+                                @enrolment.EnrolmentDate.ToString("dd MMM yyyy")
+                            </td>
+
+                            <td>
+                                @if (enrolment.FinishTime.HasValue)
+                                {
+                                    @enrolment.FinishTime.Value.ToString(@"hh\:mm\:ss")
+                                }
+                                else
+                                {
+                                    <span class="text-muted">
+                                        Not recorded
+                                    </span>
+                                }
+                            </td>
+
+                            <td>
+                                @if (enrolment.FinishingPosition.HasValue)
+                                {
+                                    <strong>
+                                        @enrolment.FinishingPosition
+                                    </strong>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">
+                                        Not recorded
+                                    </span>
+                                }
+                            </td>
+
+                            <td>
+                                @if (enrolment.ResultID.HasValue)
+                                {
+                                    <a asp-controller="Results"
+                                       asp-action="EventResults"
+                                       asp-route-eventID="@enrolment.EventID"
+                                       class="btn btn-success btn-sm">
+                                        View Results
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Results"
+                                       asp-action="CaptureResults"
+                                       asp-route-eventID="@enrolment.EventID"
+                                       asp-route-enrolmentID="@enrolment.EnrolmentID"
+                                       class="btn btn-primary btn-sm">
+                                        Capture Result
+                                    </a>
+                                }
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            No participants have enrolled in your events yet.
+        </div>
+    }
+
+    <a asp-controller="Dashboard"
+       asp-action="Index"
+       class="btn btn-secondary">
+        Back to Dashboard
+    </a>
+
+</div>

@@ -1,0 +1,67 @@
+﻿@model List<RaceDay.Mvc.Models.Category>
+
+@{
+    ViewData["Title"] = "Manage Categories";
+}
+
+<div class="container mt-5">
+
+    <h2>Manage Categories</h2>
+
+    <p>Manage the categories for this event.</p>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <a asp-controller="Categories"
+       asp-action="Create"
+       asp-route-eventID="@ViewBag.EventID"
+       class="btn btn-primary mb-3">
+        + Create New Category
+    </a>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Category Type</th>
+                    <th>Category Value</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var category in Model)
+                    {
+                        <tr>
+                            <td>@category.CategoryName</td>
+                            <td>@category.CategoryType</td>
+                            <td>@category.CategoryValue</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" class="text-center">
+                            No categories found for this event.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <a asp-controller="Events"
+       asp-action="Index"
+       class="btn btn-secondary">
+        Back to Manage Events
+    </a>
+
+</div>

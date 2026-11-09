@@ -1,0 +1,64 @@
+﻿@model RaceDay.Mvc.Models.Category
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<div class="container mt-5">
+
+    <h2>Create Category</h2>
+    <p>Add a new category to your event.</p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    <form asp-controller="Categories"
+          asp-action="Create"
+          method="post">
+
+        <input type="hidden" asp-for="EventID" />
+
+        <div class="mb-3">
+            <label asp-for="CategoryName" class="form-label">
+                Category Name
+            </label>
+            <input asp-for="CategoryName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CategoryType" class="form-label">
+                Category Type
+            </label>
+
+            <select asp-for="CategoryType" class="form-select" required>
+                <option value="">Select Category Type</option>
+                <option value="Age">Age</option>
+                <option value="Distance">Distance</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CategoryValue" class="form-label">
+                Category Value
+            </label>
+            <input asp-for="CategoryValue" class="form-control" required
+                   placeholder="e.g. Under 20 or 10 km" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Create Category
+        </button>
+
+        <a asp-controller="Categories"
+           asp-action="Index"
+           asp-route-eventID="@Model.EventID"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+</div>

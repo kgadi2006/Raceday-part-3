@@ -1,0 +1,251 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* RaceDay Theme */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f8fa;
+    color: #183153;
+    margin: 0;
+}
+
+/* Navigation */
+
+.raceday-navbar {
+    background-color: #183153;
+    padding: 15px 0;
+}
+
+.brand-icon {
+    background-color: #0f9488;
+    color: white;
+    padding: 7px 12px;
+    border-radius: 8px;
+    margin-right: 5px;
+}
+
+.raceday-navbar .nav-link {
+    color: white;
+    margin: 0 8px;
+}
+
+    .raceday-navbar .nav-link:hover {
+        color: #35d0bd;
+    }
+
+.btn-raceday {
+    background-color: #0f9488;
+    color: white;
+    border: none;
+    padding: 9px 20px;
+}
+
+    .btn-raceday:hover {
+        background-color: #0b766d;
+        color: white;
+    }
+
+.nav-login {
+    border-radius: 6px;
+}
+
+/* Footer */
+
+.raceday-footer {
+    background-color: #183153;
+    color: white;
+    padding: 22px 0;
+    margin-top: 50px;
+}
+
+/* Homepage Hero Section */
+
+.hero-section {
+    background-color: #183153;
+    color: white;
+    padding: 100px 0;
+}
+
+.hero-label {
+    color: #35d0bd;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 13px;
+}
+
+.hero-section h1 {
+    font-size: 55px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+    .hero-section h1 span {
+        color: #35d0bd;
+    }
+
+.hero-section p {
+    font-size: 17px;
+    line-height: 1.8;
+    max-width: 520px;
+    color: #e0e8f0;
+}
+
+.hero-card {
+    background-color: white;
+    color: #183153;
+    padding: 45px 25px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.hero-icon {
+    font-size: 75px;
+    margin-bottom: 20px;
+}
+
+/* Events Section */
+
+.events-section {
+    padding: 80px 0;
+}
+
+    .events-section h2 {
+        font-weight: bold;
+        margin-top: 12px;
+    }
+
+    .events-section p {
+        color: #667085;
+    }
+
+.event-card {
+    background-color: white;
+    padding: 35px 25px;
+    border-radius: 14px;
+    text-align: center;
+    height: 100%;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    transition: transform 0.2s;
+}
+
+    .event-card:hover {
+        transform: translateY(-5px);
+    }
+
+.event-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.event-card h4 {
+    font-weight: bold;
+    color: #183153;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+    }
+
+        .hero-section h1 {
+            font-size: 40px;
+        }
+
+    .hero-card {
+        margin-top: 40px;
+    }
+}
+
+/* Upcoming Events Section */
+.events-section {
+    padding: 60px 8%;
+    text-align: center;
+    background-color: #f5f8fc;
+}
+
+    .events-section h2 {
+        color: #183153;
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .events-section > p {
+        color: #666;
+        margin-bottom: 35px;
+    }
+
+/* Event Cards */
+.event-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.event-card {
+    background-color: white;
+    padding: 28px;
+    border-radius: 14px;
+    text-align: left;
+    border: 1px solid #e5eaf0;
+    box-shadow: 0 5px 18px rgba(24, 49, 83, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .event-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(24, 49, 83, 0.15);
+    }
+
+    .event-card h3 {
+        color: #183153;
+        font-size: 21px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .event-card p {
+        color: #555;
+        line-height: 1.7;
+        margin-bottom: 10px;
+    }
+
+    .event-card strong {
+        color: #0f9488;
+    }
+
+/* Mobile Layout */
+@media (max-width: 600px) {
+    .events-section {
+        padding: 40px 5%;
+    }
+
+    .event-card {
+        padding: 22px;
+    }
+}

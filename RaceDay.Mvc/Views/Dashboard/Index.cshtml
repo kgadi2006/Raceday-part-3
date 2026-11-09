@@ -1,0 +1,155 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+
+    string? role = ViewBag.Role as string;
+}
+
+<div class="container mt-5 mb-5">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Welcome to RaceDay!</h1>
+
+        <p class="text-muted">
+            Manage your races and keep track of your race activities.
+        </p>
+    </div>
+
+    @if (role == "Organizer")
+    {
+        <h3 class="fw-bold mb-4">Organizer Dashboard</h3>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4 h-100">
+                    <h5 class="fw-bold">Manage Events</h5>
+
+                    <p class="text-muted">
+                        Create, update and manage your race events.
+                    </p>
+
+                    <a asp-controller="Events"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        Manage Events
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4 h-100">
+                    <h5 class="fw-bold">Manage Categories</h5>
+
+                    <p class="text-muted">
+                        Manage the categories for your events.
+                    </p>
+
+                    <a asp-controller="Events"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        Manage Categories
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4 h-100">
+                    <h5 class="fw-bold">View Enrolments</h5>
+
+                    <p class="text-muted">
+                        View participants enrolled in your events.
+                    </p>
+
+                    <a asp-controller="Enrolments"
+                       asp-action="OrganizerEnrolments"
+                       class="btn btn-primary">
+                        View Enrolments
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4 h-100">
+                    <h5 class="fw-bold">Capture Results</h5>
+
+                    <p class="text-muted">
+                        Record finishing times and positions for participants.
+                    </p>
+
+                    <a asp-controller="Enrolments"
+                       asp-action="OrganizerEnrolments"
+                       class="btn btn-primary">
+                        Capture Results
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    }
+
+    else if (role == "Participant")
+    {
+        <h3 class="fw-bold mb-4">Participant Dashboard</h3>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4 h-100">
+                    <h5 class="fw-bold">Explore Events</h5>
+
+                    <p class="text-muted">
+                        Discover available races and enrol in an event.
+                    </p>
+
+                    <a asp-controller="Events"
+                       asp-action="Index"
+                       class="btn btn-primary">
+                        Explore Events
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4 h-100">
+                    <h5 class="fw-bold">My Enrolments</h5>
+
+                    <p class="text-muted">
+                        View the events you have enrolled in.
+                    </p>
+
+                    <a asp-controller="Enrolments"
+                       asp-action="MyEnrolments"
+                       class="btn btn-primary">
+                        My Enrolments
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm p-4 h-100">
+                    <h5 class="fw-bold">My Results</h5>
+
+                    <p class="text-muted">
+                        View your race finishing times and positions.
+                    </p>
+
+                    <a asp-controller="Results"
+                       asp-action="MyResults"
+                       class="btn btn-primary">
+                        My Results
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    }
+
+    else
+    {
+        <div class="alert alert-warning text-center">
+            Your account role could not be identified.
+            Please log in again.
+        </div>
+    }
+
+</div>

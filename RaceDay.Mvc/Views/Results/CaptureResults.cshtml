@@ -1,0 +1,94 @@
+﻿@model RaceDay.Mvc.Models.ResultRequest
+
+@{
+    ViewData["Title"] = "Capture Results";
+}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow-sm p-4">
+
+        <h2 class="fw-bold">Capture Race Result</h2>
+
+        <p class="text-muted">
+            Enter the participant's finishing time and position.
+        </p>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form asp-controller="Results"
+              asp-action="CaptureResults"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <input type="hidden"
+                   name="eventID"
+                   value="@ViewBag.EventID" />
+
+            <input type="hidden"
+                   asp-for="EnrolmentID" />
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Enrolment ID
+                </label>
+
+                <input class="form-control"
+                       value="@Model.EnrolmentID"
+                       readonly />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="FinishTime"
+                       class="form-label">
+                    Finish Time
+                </label>
+
+                <input asp-for="FinishTime"
+                       type="time"
+                       step="1"
+                       class="form-control"
+                       required />
+
+                <span asp-validation-for="FinishTime"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="FinishingPosition"
+                       class="form-label">
+                    Finishing Position
+                </label>
+
+                <input asp-for="FinishingPosition"
+                       type="number"
+                       min="1"
+                       class="form-control"
+                       required />
+
+                <span asp-validation-for="FinishingPosition"
+                      class="text-danger"></span>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary">
+                Save Result
+            </button>
+
+            <a asp-controller="Enrolments"
+               asp-action="OrganizerEnrolments"
+               class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
